@@ -6,6 +6,8 @@ and disappear with a double-click.
 Paddock is a standalone app. It does not modify or load anything into Explorer; each fence is an ordinary window kept
 directly above the desktop, backed by a real folder.
 
+![Paddock: fences rolling open, drawing a new fence, and the customize menu](docs/demo.gif)
+
 ## Features
 
 - **Fences are real folders.** Drop a file or shortcut on a fence and it moves into that fence's folder
