@@ -5,9 +5,9 @@
 Translucent panels on your Windows desktop that hold files and shortcuts, roll up out of the way, and disappear with a
 double-click. Free, MIT licensed, and a 725 KB installer.
 
-[![Paddock: three fences holding games, work files and tools. Click to watch the 20-second video.](brag-output/brag.jpg)](brag-output/brag.mp4)
+![Paddock in 20 seconds: a cluttered desktop is sorted into three fences, which roll up, hide and change colour](brag-output/brag.gif)
 
-*Click the image to watch the 20-second video.*
+[Download the video with sound (MP4, 2.8 MB)](https://github.com/rykou/paddock/raw/main/brag-output/brag.mp4)
 
 - **Draw a fence** on empty desktop and drop your files in.
 - **Every fence is a real folder**, so nothing is locked inside the app.
