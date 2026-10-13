@@ -1,12 +1,25 @@
 # Paddock
 
-Desktop fences for Windows: translucent panels on your desktop that hold files and shortcuts, roll up out of the way,
-and disappear with a double-click.
+**Your desktop is a junk drawer. Paddock gives it fences.**
+
+Translucent panels on your Windows desktop that hold files and shortcuts, roll up out of the way, and disappear with a
+double-click. Free, MIT licensed, and a 725 KB installer.
+
+[![Paddock: three fences holding games, work files and tools. Click to watch the 20-second video.](brag-output/brag.jpg)](brag-output/brag.mp4)
+
+*Click the image to watch the 20-second video.*
+
+- **Draw a fence** on empty desktop and drop your files in.
+- **Every fence is a real folder**, so nothing is locked inside the app.
+- **Roll fences up**, or double-click the desktop to clear them all.
+- **Nine colour presets**, or pick any colour.
 
 Paddock is a standalone app. It does not modify or load anything into Explorer; each fence is an ordinary window kept
 directly above the desktop, backed by a real folder.
 
-![Paddock: fences rolling open, drawing a new fence, and the customize menu](docs/demo.gif)
+## The real thing
+
+![Paddock running: fences rolling open, drawing a new fence, and the customize menu](docs/demo.gif)
 
 ## Features
 
