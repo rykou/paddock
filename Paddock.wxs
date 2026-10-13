@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="Paddock" Language="1033" Version="$(var.Version)" Manufacturer="muryl"
+           UpgradeCode="7C0B6E0E-6B0C-4D55-9A6C-2E3C1F4D8A51">
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" Platform="x64"
+             Description="Desktop fences for grouping shortcuts" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Paddock is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="PaddockIcon.exe" SourceFile="$(var.BinDir)\Paddock.exe" />
+    <Property Id="ARPPRODUCTICON" Value="PaddockIcon.exe" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="Paddock">
+          <Component Id="PaddockExe" Guid="*" Win64="yes">
+            <File Id="PaddockExeFile" Source="$(var.BinDir)\Paddock.exe" KeyPath="yes">
+              <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="Paddock"
+                        WorkingDirectory="INSTALLFOLDER" Icon="PaddockIcon.exe" Advertise="yes" />
+            </File>
+          </Component>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder" />
+    </Directory>
+
+    <Feature Id="Main" Title="Paddock" Level="1">
+      <ComponentRef Id="PaddockExe" />
+    </Feature>
+  </Product>
+</Wix>
