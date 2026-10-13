@@ -1,0 +1,5 @@
+work/*
+!work/index.html
+!work/render.py
+!work/audio.py
+!work/icon.png

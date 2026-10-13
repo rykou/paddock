@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Seg"; src: url("file:///mnt/c/Windows/Fonts/segoeui.ttf"); font-weight: 400; }
+@font-face { font-family: "Seg"; src: url("file:///mnt/c/Windows/Fonts/segoeuib.ttf"); font-weight: 700; }
+@font-face { font-family: "Con"; src: url("file:///mnt/c/Windows/Fonts/consola.ttf"); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: #121218; }
+body { font-family: "Seg", sans-serif; color: #fff; }
+#stage { position: absolute; inset: 0; overflow: hidden; }
+#wall { position: absolute; inset: 0;
+  background: linear-gradient(180deg, #4f4a7d 0%, #8a6f9f 18%, #d79bb4 34%, #f3c1b8 44%, #f6d3c0 47.9%, #2f76a6 48%, #256391 70%, #1b4e79 100%); }
+#wall svg { position: absolute; left: 0; top: 0; }
+#scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 420px;
+  background: linear-gradient(180deg, rgba(10,14,24,0) 0%, rgba(10,14,24,.72) 70%, rgba(10,14,24,.82) 100%); }
+.fence { position: absolute; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 14px 40px rgba(0,0,0,.35); }
+.fence .bar { position: absolute; left: 0; right: 0; top: 0; height: 44px; background: rgba(255,255,255,.13);
+  font-weight: 700; font-size: 19px; line-height: 44px; text-align: center; }
+.fence .arrow { position: absolute; right: 16px; top: 19px; width: 0; height: 0;
+  border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 7px solid rgba(255,255,255,.85); }
+.icon { position: absolute; width: 120px; height: 116px; text-align: center; }
+.icon .tile { width: 64px; height: 64px; border-radius: 15px; margin: 6px auto 8px; font-weight: 700; font-size: 30px;
+  line-height: 64px; color: rgba(255,255,255,.95); box-shadow: 0 4px 10px rgba(0,0,0,.28); }
+.icon .lab { font-size: 16px; line-height: 19px; text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 0 2px rgba(0,0,0,.8); white-space: nowrap; }
+#sel { position: absolute; background: rgba(80,150,255,.28); border: 2px solid rgba(120,180,255,.9); border-radius: 4px; }
+#btn { position: absolute; background: #2f6fe0; border-radius: 6px; padding: 10px 20px; font-size: 20px; font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0,0,0,.4); white-space: nowrap; }
+#cursor { position: absolute; width: 34px; height: 34px; }
+.ring { position: absolute; border: 3px solid #fff; border-radius: 50%; }
+.cap { position: absolute; left: 0; right: 0; top: 858px; text-align: center; font-weight: 700; font-size: 82px;
+  letter-spacing: -1px; text-shadow: 0 4px 24px rgba(0,0,0,.55); white-space: nowrap; }
+#chip { position: absolute; font-family: "Con", monospace; font-size: 27px; background: rgba(10,14,24,.88);
+  border: 1px solid rgba(255,255,255,.18); border-radius: 10px; padding: 12px 22px; white-space: nowrap; }
+#swatches { position: absolute; left: 0; right: 0; top: 730px; display: flex; justify-content: center; gap: 22px; }
+#swatches div { width: 62px; height: 62px; border-radius: 16px; border: 2px solid rgba(255,255,255,.55);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35); }
+#outro { position: absolute; inset: 0; background: #121218; }
+#outro .in { position: absolute; left: 0; right: 0; top: 270px; text-align: center; }
+#outro img { width: 190px; height: 190px; }
+#outro .name { font-weight: 700; font-size: 132px; letter-spacing: -3px; line-height: 150px; }
+#outro .sub { font-size: 46px; color: #c7d0de; margin-top: 4px; }
+#outro .meta { font-size: 30px; color: #8fa0b8; margin-top: 44px; }
+#outro .url { display: inline-block; font-family: "Con", monospace; font-size: 32px; margin-top: 24px; padding: 12px 26px;
+  border-radius: 10px; background: #202a3a; border: 1px solid rgba(255,255,255,.16); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="wall">
+    <svg width="1920" height="1080" viewBox="0 0 1920 1080">
+      <ellipse cx="560" cy="150" rx="420" ry="46" fill="#fff" opacity=".10"/>
+      <ellipse cx="1420" cy="250" rx="520" ry="40" fill="#fff" opacity=".12"/>
+      <ellipse cx="900" cy="360" rx="600" ry="26" fill="#fff" opacity=".14"/>
+      <polygon points="0,519 0,470 180,438 330,462 520,420 700,468 860,450 1000,519" fill="#7f7aa8" opacity=".75"/>
+      <polygon points="620,519 820,466 980,486 1160,430 1340,474 1520,444 1700,476 1920,452 1920,519" fill="#3d5f96"/>
+      <polygon points="1100,519 1300,484 1460,500 1640,470 1800,496 1920,488 1920,519" fill="#2c4f86"/>
+    </svg>
+  </div>
+  <div id="fences"></div>
+  <div id="icons"></div>
+  <div id="sel"></div>
+  <div id="btn">Create fence here</div>
+  <div id="chip">%USERPROFILE%\Paddock\Games</div>
+  <div id="scrim"></div>
+  <div id="swatches"></div>
+  <div id="caps"></div>
+  <div id="rings"></div>
+  <svg id="cursor" viewBox="0 0 34 34"><path d="M4 2 L4 27 L10.5 21 L15 31 L19.5 29 L15 19.5 L24 19.5 Z" fill="#fff" stroke="#111" stroke-width="2" stroke-linejoin="round"/></svg>
+  <div id="outro"><div class="in">
+    <img src="icon.png">
+    <div class="name">Paddock</div>
+    <div class="sub">Desktop fences for Windows</div>
+    <div class="meta">Free &nbsp;·&nbsp; MIT &nbsp;·&nbsp; 725 KB installer</div>
+    <div class="url">github.com/rykou/paddock</div>
+  </div></div>
+</div>
+<script>
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const eo = x => 1 - Math.pow(1 - x, 3);
+const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const back = x => { const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const lerp = (a, b, k) => a + (b - a) * k;
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const P = { Graphite: '#202A3A', Midnight: '#121218', Slate: '#475569', Ocean: '#0E7490', Forest: '#166534',
+            Plum: '#6B21A8', Rose: '#BE185D', Amber: '#D97706', Snow: '#F1F5F9' };
+
+const BAR = 44, CELL = 130;
+const F = [
+  { name: 'Games', x: 120,  y: 80, w: 560, h: 330, cols: 4, show: 4.5,  roll: 11.2, cols2: [[15.0, 'Ocean'], [16.1, 'Forest']] },
+  { name: 'Work',  x: 720,  y: 80, w: 560, h: 330, cols: 4, show: 4.85, roll: 11.6, cols2: [[15.25, 'Plum'], [16.35, 'Rose']] },
+  { name: 'Tools', x: 1320, y: 80, w: 480, h: 330, cols: 3, show: 5.05, roll: 11.8, cols2: [[15.5, 'Amber'], [16.6, 'Slate']] },
+];
+const TC = ['#f5a524', '#3fb98c', '#e5605d', '#5b93f5', '#9b7cf0', '#22a6d6', '#e86aa6'];
+const names = [
+  ['Starfall', 'Kart Rally', 'Dungeon', 'Chess', 'Blocks', 'Skyline', 'Pinball'],
+  ['Report.docx', 'Budget.xlsx', 'Notes.txt', 'Slides.pptx', 'Invoice.pdf', 'Plan.md', 'Logo.png', 'Todo.txt'],
+  ['Terminal', 'Paint', 'Calculator', 'Recorder', 'Editor', 'Backup'],
+];
+// deterministic pseudo-random
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const I = [];
+names.forEach((list, fi) => list.forEach((n, k) => {
+  const f = F[fi], pad = (f.w - f.cols * CELL) / 2;
+  I.push({ name: n, fi, tc: TC[(k + fi * 2) % TC.length],
+    tx: f.x + pad + (k % f.cols) * CELL + 5, ty: f.y + BAR + 14 + Math.floor(k / f.cols) * CELL,
+    sx: 0, sy: 0, rot: (rnd() - .5) * 26, delay: 0 });
+}));
+// the stray file that gets dragged in scene 3 goes to Games slot 7
+const stray = { name: 'Trailer.mp4', fi: 0, tc: '#e5605d', tx: F[0].x + 20 + 3 * CELL + 5, ty: F[0].y + BAR + 14 + CELL,
+                sx: 930, sy: 520, rot: 0, stray: true };
+// scatter positions on a jittered grid so the mess covers the screen without stacking
+const cells = [];
+for (let r = 0; r < 4; r++) for (let c = 0; c < 7; c++) cells.push([c, r]);
+cells.sort(() => rnd() - .5);
+I.forEach((ic, i) => {
+  const [c, r] = cells[i];
+  ic.sx = 110 + c * 250 + (rnd() - .5) * 150; ic.sy = 60 + r * 185 + (rnd() - .5) * 90;
+  ic.delay = 5.0 + rnd() * 0.75;
+});
+I.push(stray);
+
+const $ = id => document.getElementById(id);
+F.forEach(f => {
+  const d = document.createElement('div'); d.className = 'fence';
+  d.innerHTML = `<div class="bar">${f.name}<div class="arrow"></div></div>`;
+  $('fences').appendChild(d); f.el = d;
+});
+I.forEach(ic => {
+  const d = document.createElement('div'); d.className = 'icon';
+  d.innerHTML = `<div class="tile" style="background:${ic.tc}">${ic.name[0]}</div><div class="lab">${ic.name}</div>`;
+  $('icons').appendChild(d); ic.el = d;
+});
+const CAPS = [
+  [0.25, 2.55, 'Your desktop is a junk drawer.'],
+  [4.75, 6.75, 'Paddock: fences for your desktop.'],
+  [7.25, 10.35, 'Every fence is a real folder.'],
+  [10.85, 12.45, 'Roll them up.'],
+  [12.85, 14.15, 'Double-click. Desktop cleared.'],
+  [14.65, 16.95, 'Nine colour presets. Or pick any.'],
+].map(([a, b, s]) => { const d = document.createElement('div'); d.className = 'cap'; d.textContent = s; $('caps').appendChild(d); return { a, b, el: d }; });
+Object.entries(P).forEach(([n, c]) => { const d = document.createElement('div'); d.style.background = c; $('swatches').appendChild(d); });
+
+// cursor path: [time, x, y]
+const CUR = [
+  [2.6, 1500, 760], [3.15, 120, 80], [3.25, 120, 80], [4.0, 680, 410], [4.05, 680, 410], [4.4, 440, 262], [5.0, 440, 262], [5.6, 900, 700],
+  [7.0, 900, 700], [7.5, 990, 560], [7.65, 990, 560], [8.4, 590, 300], [8.7, 590, 300], [9.4, 760, 640],
+  [10.6, 760, 640], [11.0, 400, 104], [11.5, 400, 104], [12.4, 620, 560], [12.9, 960, 600], [13.6, 960, 600], [14.4, 1620, 600], [17.2, 1700, 640],
+];
+const CLICKS = [[4.5, 440, 262], [11.05, 400, 104], [11.2, 400, 104], [13.0, 960, 600], [13.15, 960, 600]];
+const rings = CLICKS.map(() => { const d = document.createElement('div'); d.className = 'ring'; $('rings').appendChild(d); return d; });
+
+function curPos(t) {
+  if (t <= CUR[0][0]) return CUR[0];
+  for (let i = 1; i < CUR.length; i++) if (t <= CUR[i][0]) {
+    const [t0, x0, y0] = CUR[i - 1], [t1, x1, y1] = CUR[i], k = eio(prog(t, t0, t1));
+    return [t, lerp(x0, x1, k), lerp(y0, y1, k)];
+  }
+  return CUR[CUR.length - 1];
+}
+function fenceColor(f, t) {
+  let c = hex(P.Graphite);
+  for (const [ct, name] of f.cols2) { const k = eo(prog(t, ct, ct + .35)), n = hex(P[name]); c = c.map((v, i) => lerp(v, n[i], k)); }
+  return c;
+}
+
+window.render = function (t) {
+  // quick hide: everything in fences fades out at 13.15, back at 14.4
+  const hide = eio(prog(t, 13.15, 13.55)) - eio(prog(t, 14.4, 14.8));
+  F.forEach(f => {
+    const a = prog(t, f.show, f.show + .32), pop = back(a);
+    const roll = eio(prog(t, f.roll, f.roll + .3)) - eio(prog(t, 14.4, 14.7));
+    f.curH = lerp(f.h, BAR, roll);
+    const c = fenceColor(f, t);
+    const pulse = f.name === 'Games' ? Math.sin(prog(t, 8.4, 8.8) * Math.PI) * .03 : 0;
+    Object.assign(f.el.style, { left: f.x + 'px', top: f.y + 'px', width: f.w + 'px', height: f.curH + 'px',
+      background: `rgba(${c.map(Math.round).join(',')},.85)`, opacity: clamp(a * 1.6) * (1 - hide),
+      transform: `scale(${lerp(.9, 1, pop) + pulse})` });
+    f.el.querySelector('.arrow').style.transform = `rotate(${-90 * roll}deg)`;
+    f.vis = 1 - hide;
+  });
+  I.forEach((ic, i) => {
+    const f = F[ic.fi];
+    let x, y, rot, op = 1, sc = 1;
+    if (ic.stray) {
+      const k = eio(prog(t, 7.65, 8.4));
+      x = lerp(ic.sx, ic.tx, k); y = lerp(ic.sy, ic.ty, k); rot = 0;
+      sc = 1 + Math.sin(k * Math.PI) * .18;
+      op = t >= 8.4 ? f.vis : 1;
+    } else {
+      const k = eio(prog(t, ic.delay, ic.delay + .7));
+      x = lerp(ic.sx, ic.tx, k); y = lerp(ic.sy, ic.ty, k) - Math.sin(k * Math.PI) * 60; rot = lerp(ic.rot, 0, k);
+      op = eo(prog(t, i * .012, i * .012 + .25)) * (k >= 1 ? f.vis : 1);
+    }
+    const inFence = ic.stray ? t >= 8.4 : t >= ic.delay + .7;
+    const cut = inFence ? clamp(y + 116 - (f.y + f.curH), 0, 116) : 0;
+    Object.assign(ic.el.style, { left: x + 'px', top: y + 'px', opacity: op,
+      transform: `rotate(${rot}deg) scale(${sc})`, clipPath: `inset(0 0 ${cut}px 0)` });
+  });
+  // draw-to-create selection and button
+  const selK = prog(t, 3.25, 4.0), selOn = t >= 3.25 && t < 4.62;
+  const [, cx, cy] = curPos(t);
+  Object.assign($('sel').style, { display: selOn ? 'block' : 'none', left: '120px', top: '80px',
+    width: (t < 4.0 ? Math.max(0, cx - 120) : 560) + 'px', height: (t < 4.0 ? Math.max(0, cy - 80) : 330) + 'px',
+    opacity: 1 - prog(t, 4.5, 4.62) });
+  const bK = back(prog(t, 4.02, 4.22));
+  Object.assign($('btn').style, { display: t >= 4.02 && t < 4.62 ? 'block' : 'none', left: '303px', top: '222px',
+    transform: `scale(${lerp(.7, 1, bK) * (1 - .08 * Math.sin(prog(t, 4.45, 4.6) * Math.PI))})`, opacity: prog(t, 4.02, 4.15) * (1 - prog(t, 4.52, 4.62)) });
+  // folder path chip under the Games fence
+  const chK = eo(prog(t, 8.55, 8.9)) * (1 - prog(t, 10.2, 10.5));
+  Object.assign($('chip').style, { left: '120px', top: (432 + (1 - eo(prog(t, 8.55, 8.9))) * 16) + 'px', opacity: chK });
+  // captions
+  CAPS.forEach(c => {
+    const i = eo(prog(t, c.a, c.a + .3)), o = prog(t, c.b, c.b + .22);
+    Object.assign(c.el.style, { opacity: i * (1 - o), transform: `translateY(${(1 - i) * 26 - o * 14}px)` });
+  });
+  // swatches
+  [...$('swatches').children].forEach((d, i) => {
+    const k = back(prog(t, 14.75 + i * .05, 15.0 + i * .05)), o = prog(t, 16.95, 17.15);
+    Object.assign(d.style, { opacity: clamp(k * 2) * (1 - o), transform: `scale(${lerp(.4, 1, k)})` });
+  });
+  // cursor and click rings
+  Object.assign($('cursor').style, { left: cx + 'px', top: cy + 'px', opacity: prog(t, 2.6, 2.85) * (1 - prog(t, 16.9, 17.15)) });
+  CLICKS.forEach(([ct, x, y], i) => {
+    const k = prog(t, ct, ct + .4), r = 10 + eo(k) * 34;
+    Object.assign(rings[i].style, { display: k > 0 && k < 1 ? 'block' : 'none', left: (x - r) + 'px', top: (y - r) + 'px',
+      width: 2 * r + 'px', height: 2 * r + 'px', opacity: 1 - k });
+  });
+  // outro: dip to dark, then content rises in
+  const oK = prog(t, 17.2, 17.6), cK = eo(prog(t, 17.55, 18.0));
+  $('outro').style.opacity = oK;
+  Object.assign($('outro').firstElementChild.style, { opacity: cK, transform: `translateY(${(1 - cK) * 30}px)` });
+};
+window.ready = Promise.all([document.fonts.load('700 20px Seg'), document.fonts.load('400 20px Seg'), document.fonts.load('20px Con'),
+  document.fonts.ready, new Promise(r => { const im = document.querySelector('#outro img'); im.complete ? r() : im.onload = r; })]).then(() => { window.render(0); return true; });
+</script>
+</body>
+</html>

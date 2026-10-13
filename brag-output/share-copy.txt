@@ -1,0 +1,3 @@
+My desktop was a junk drawer, so I built Paddock: fences for the Windows desktop. Draw one, drop your files in, roll it up, or double-click to clear the lot. Every fence is a real folder, the installer is 725 KB, and it's free and MIT licensed.
+
+github.com/rykou/paddock
