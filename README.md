@@ -1,5 +1,7 @@
 # Paddock
 
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-PayPal-0070ba?logo=paypal&logoColor=white)](https://paypal.me/rykou893)
+
 **Your desktop is a junk drawer. Paddock gives it fences.**
 
 Translucent panels on your Windows desktop that hold files and shortcuts, roll up out of the way, and disappear with a
@@ -65,5 +67,9 @@ folders then live there instead of in your profile.
 - Virtual items such as This PC and Recycle Bin are not files and cannot be dropped in.
 - Opacity applies to the whole fence, icons included.
 - Rename is not available from the item right-click menu.
+
+## Support
+
+Paddock is free. If it tidied up your desktop, you can [buy me a coffee](https://paypal.me/rykou893).
 
 Paddock is an independent project and is not affiliated with or endorsed by Stardock.
